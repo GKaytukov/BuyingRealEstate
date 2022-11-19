@@ -1,4 +1,5 @@
-import { dbConnect } from "./dbConnect.js"
+import { dbConnect } from "./dbConnect.js";
+import { ObjectId } from "mongodb"; // Importing Object - unique identifiers for all the docs in db
 
 export async function addNewRealEstate(req, res) {
     const newRealEstate = req.body
@@ -25,7 +26,29 @@ export async function findRealEstateByType(req,res) {
     res.send(collection)
 }
 
+export async function updateRealEstate(req, res) {
 
+    const { RealEstateId } = req.params
+    const db = dbConnect()
+    
+        await db.collection('RealEstate')
+            .findOneAndUpdate({ _id: new ObjectId(RealEstateId) }, { $set: req.body })
+            .catch(err => {
+                res.status(500).send(err)
+                return
+            })
+        res.status(202).send({ message: "Real Estate updated" })
+}
+export async function getOneRealEstate(req,res) {
+    const db = dbConnect()
+    const { RealEstateId } = req.params
+    const collection = await db.collection("RealEstate").find({ Id: RealEstateId }).toArray()
+    res.send(collection)
+}
+
+export async function deleteRealEstate(req, res) {
+    const db = dbConnect()
+}
 
 
 
