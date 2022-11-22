@@ -8,7 +8,8 @@ app.use(express.json())
 app.post('/RealEstate', addNewRealEstate)
 app.get('/RealEstate', getAllRealEstate)
 app.patch('/RealEstate/:RealEstateId', updateRealEstate)
-app.get('/RealEstate/:id', getOneRealEstate)
+app.get('/RealEstate/:RealEstateId', getOneRealEstate)
+app.delete('/RealEstate/:RealEstateId', deleteRealEstate)
 
 app.get('/', (req, res) => {
     res.send('Hello Jacques')
