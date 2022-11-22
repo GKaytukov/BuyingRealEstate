@@ -11,7 +11,7 @@ export async function addNewRealEstate(req, res) {
             return
         })
     res.status(201).send({ message: "New RealEstate Added." })
-}//getAll?
+} // getAll
 
 export async function getAllRealEstate(req, res) {
     const db = dbConnect()
